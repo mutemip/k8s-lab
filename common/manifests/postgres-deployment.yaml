@@ -21,42 +21,33 @@ spec:
           name: postgres
         env:
         - name: POSTGRES_USER
-          valueFrom:
-            secretKeyRef:
-              name: postgres-secret
-              key: postgres-user
+          value: "petclinic"
         - name: POSTGRES_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: postgres-secret
-              key: postgres-password
+          value: "petclinic"
         - name: POSTGRES_DB
-          valueFrom:
-            secretKeyRef:
-              name: postgres-secret
-              key: postgres-db
+          value: "petclinic"
         volumeMounts:
         - name: postgres-storage
           mountPath: /var/lib/postgresql/data
         readinessProbe:
           exec:
             command:
-            - pg_isready
-            - -U
-            - petclinic
-          initialDelaySeconds: 10
+            - sh
+            - -c
+            - pg_isready -U petclinic
+          initialDelaySeconds: 15
           periodSeconds: 5
         livenessProbe:
           exec:
             command:
-            - pg_isready
-            - -U
-            - petclinic
+            - sh
+            - -c
+            - pg_isready -U petclinic
           initialDelaySeconds: 30
           periodSeconds: 10
       volumes:
       - name: postgres-storage
-        emptyDir: {}  # Changed from PVC to emptyDir
+        emptyDir: {}
 ---
 apiVersion: v1
 kind: Service

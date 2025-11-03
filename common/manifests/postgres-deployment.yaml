@@ -35,8 +35,6 @@ spec:
             secretKeyRef:
               name: postgres-secret
               key: postgres-db
-        - name: PGDATA
-          value: /var/lib/postgresql/data/pgdata
         volumeMounts:
         - name: postgres-storage
           mountPath: /var/lib/postgresql/data
@@ -58,8 +56,7 @@ spec:
           periodSeconds: 10
       volumes:
       - name: postgres-storage
-        persistentVolumeClaim:
-          claimName: postgres-pvc
+        emptyDir: {}  # Changed from PVC to emptyDir
 ---
 apiVersion: v1
 kind: Service

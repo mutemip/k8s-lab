@@ -4,5 +4,5 @@ metadata:
   name: petclinic-config
   namespace: default
 data:
-  SPRING_PROFILES_ACTIVE: "mysql"
-  SPRING_DATASOURCE_URL: "jdbc:mysql://mysql:3306/petclinic"
+  SPRING_PROFILES_ACTIVE: "postgres"
+  SPRING_DATASOURCE_URL: "jdbc:postgresql://postgres:5432/petclinic"

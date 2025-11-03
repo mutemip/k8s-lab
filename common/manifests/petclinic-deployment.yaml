@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: petclinic
-        image: yourusername/spring-petclinic:latest  # Replace with your image
+        image: mutemip/petclinic-v2:latest
         ports:
         - containerPort: 8080
           name: http

@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: petclinic
-        image: mutemip/petclinic-v2:latest
+        image: mutemip/petclinic:latest
         ports:
         - containerPort: 8080
           name: http

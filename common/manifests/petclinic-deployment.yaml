@@ -22,25 +22,13 @@ spec:
           name: http
         env:
         - name: SPRING_PROFILES_ACTIVE
-          valueFrom:
-            configMapKeyRef:
-              name: petclinic-config
-              key: SPRING_PROFILES_ACTIVE
+          value: "postgres"
         - name: SPRING_DATASOURCE_URL
-          valueFrom:
-            configMapKeyRef:
-              name: petclinic-config
-              key: SPRING_DATASOURCE_URL
+          value: "jdbc:postgresql://postgres:5432/petclinic"
         - name: SPRING_DATASOURCE_USERNAME
-          valueFrom:
-            secretKeyRef:
-              name: postgres-secret
-              key: postgres-user
+          value: "petclinic"
         - name: SPRING_DATASOURCE_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: postgres-secret
-              key: postgres-password
+          value: "petclinic"
         readinessProbe:
           httpGet:
             path: /
@@ -48,6 +36,7 @@ spec:
           initialDelaySeconds: 60
           periodSeconds: 10
           timeoutSeconds: 5
+          failureThreshold: 3
         livenessProbe:
           httpGet:
             path: /
@@ -55,6 +44,7 @@ spec:
           initialDelaySeconds: 90
           periodSeconds: 20
           timeoutSeconds: 5
+          failureThreshold: 3
 ---
 apiVersion: v1
 kind: Service
